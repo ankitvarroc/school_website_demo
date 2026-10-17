@@ -1,0 +1,629 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Syne:wght@500;600;700;800&display=swap');
+
+/* ==========================================================================
+   Dynamic Public School Design System & Typography Tokens
+   - Syne: Bold fonts, headings, display numbers, titles
+   - Afacad: Small fonts, body copy, descriptions, navigation, labels
+   ========================================================================== */
+:root {
+  --font-heading: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Afacad', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-primary: var(--font-body);
+  --font-mono: var(--font-geist-mono), monospace;
+
+  /* Prestigious Institutional Palette */
+  --dav-navy-900: #060b17;
+  --dav-navy-800: #0b1528;
+  --dav-navy-700: #101f3c;
+  --dav-navy-600: #192e59;
+  --dav-gold-500: #d4af37;
+  --dav-gold-400: #f1c40f;
+  --dav-gold-300: #fcd34d;
+  --dav-accent-blue: #2563eb;
+  --dav-accent-cyan: #06b6d4;
+
+  /* Surfaces & Glassmorphism */
+  --dav-surface: #0e172a;
+  --dav-surface-card: rgba(16, 27, 49, 0.78);
+  --dav-border: rgba(212, 175, 55, 0.18);
+  --dav-border-subtle: rgba(255, 255, 255, 0.09);
+  --dav-border-glow: rgba(212, 175, 55, 0.45);
+
+  /* Typography */
+  --dav-text-main: #f8fafc;
+  --dav-text-muted: #94a3b8;
+  --dav-text-gold: #f6d860;
+
+  /* Gradients */
+  --grad-gold: linear-gradient(135deg, #fcd34d 0%, #d4af37 50%, #b45309 100%);
+  --grad-navy: linear-gradient(180deg, rgba(6, 11, 23, 0.8) 0%, #060b17 100%);
+  --grad-card: linear-gradient(145deg, rgba(20, 32, 58, 0.85) 0%, rgba(10, 18, 34, 0.95) 100%);
+
+  /* Header Height Tokens (Refined for Floating Capsule Navbar) */
+  --header-height-desktop: 80px;
+  --header-height-mobile: 68px;
+}
+
+html {
+  scroll-padding-top: var(--header-height-desktop);
+}
+
+@media (max-width: 991.98px) {
+  html {
+    scroll-padding-top: var(--header-height-mobile);
+  }
+}
+
+/* ==========================================================================
+   Lenis Smooth Scroll Reset & Performance Rules
+   ========================================================================== */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--dav-navy-900);
+  color: var(--dav-text-main);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Typography Hierarchy: Syne for Bold & Afacad for Small / Body
+   ========================================================================== */
+/* Bold Elements - Syne */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
+.fw-bold, .fw-bolder, .fw-semibold,
+.badge-gold,
+.hero-stat-ribbon .display-6,
+.navbar-brand,
+.btn,
+.btn-gold,
+.btn-outline-gold,
+.card-title,
+.modal-title,
+strong, b {
+  font-family: var(--font-heading);
+}
+
+h1, .display-1, .display-2 {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+h2, h3, .display-3, .display-4 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h4, h5, h6, .display-5, .display-6 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Small, Body & Interface Copy - Afacad */
+p, span, small, a, li, input, select, textarea, label,
+.small, .nav-link, .top-notice-bar, .mega-menu-link,
+.text-secondary, .text-muted, .text-white-50, .form-control, .form-select {
+  font-family: var(--font-body);
+}
+
+.small, small, .fs-6, .text-white-50, .text-secondary {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+/* Accessibility Skip Link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--dav-gold-400);
+  color: #000;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  z-index: 99999;
+  border-radius: 0.5rem;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ==========================================================================
+   Fixed Header & Floating Rounded Navbar on Hero Section
+   ========================================================================== */
+.institutional-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1040;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.institutional-header > * {
+  pointer-events: auto;
+}
+
+.top-notice-bar {
+  background: rgba(6, 11, 23, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+/* Floating Rounded Navbar Container */
+.floating-navbar-container {
+  max-width: 1380px;
+  margin: 12px auto 0;
+  padding: 0 1.25rem;
+  position: relative;
+}
+
+@media (max-width: 991.98px) {
+  .floating-navbar-container {
+    margin: 8px auto 0;
+    padding: 0 0.85rem;
+  }
+}
+
+/* Floating Pill-Shaped Navbar Rounded From Both Sides (Frosted Glass on Hero) */
+.floating-rounded-navbar {
+  background: rgba(6, 12, 26, 0.78) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  border-radius: 9999px !important; /* Fully rounded capsule on both sides */
+  box-shadow: 
+    0 20px 45px -10px rgba(0, 0, 0, 0.75),
+    0 0 25px rgba(212, 175, 55, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
+  padding: 0.5rem 1.4rem !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-rounded-navbar:hover {
+  border-color: rgba(212, 175, 55, 0.55) !important;
+  box-shadow: 
+    0 24px 50px -10px rgba(0, 0, 0, 0.85),
+    0 0 35px rgba(212, 175, 55, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.28) !important;
+}
+
+@media (max-width: 991.98px) {
+  .floating-rounded-navbar {
+    padding: 0.45rem 1rem !important;
+  }
+}
+
+/* Desktop Full-Width Mega Menu Dropdown (Floating Card with Rounded Corners) */
+.mega-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(6, 12, 25, 0.95) !important;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  border-radius: 28px !important; /* Rounded corners matching floating aesthetic */
+  box-shadow: 0 30px 70px -10px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 175, 55, 0.15) !important;
+  padding: 2.2rem 2.2rem !important;
+  animation: megaDropdownSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 1050;
+}
+
+@keyframes megaDropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Scrolled Past Hero State: Top Header Removed, Only Floating Navbar Fixed Solid
+   ========================================================================== */
+.institutional-header.scrolled-past-hero {
+  background: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  pointer-events: none;
+}
+
+.institutional-header.scrolled-past-hero > * {
+  pointer-events: auto;
+}
+
+.institutional-header.scrolled-past-hero .top-notice-bar {
+  display: none !important; /* Top header info bar completely removed after scrolling hero section */
+}
+
+.institutional-header.scrolled-past-hero .floating-rounded-navbar {
+  background: #0b1528 !important; /* Solid opaque pill without transparency */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-color: rgba(212, 175, 55, 0.5) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9), 0 0 20px rgba(212, 175, 55, 0.18) !important;
+}
+
+.institutional-header.scrolled-past-hero .floating-navbar-container {
+  margin: 10px auto 0;
+}
+
+.institutional-header.scrolled-past-hero .mega-menu-dropdown {
+  background: #060c19 !important; /* Solid mega menu without transparency */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.mega-menu-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.65rem;
+  color: var(--dav-text-main);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.mega-menu-link:hover {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--dav-text-gold);
+  transform: translateX(4px);
+}
+
+.mega-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--dav-gold-400);
+}
+
+/* ==========================================================================
+   Mobile Responsive Offcanvas Drawer & Backdrop
+   ========================================================================== */
+.mobile-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1060;
+  animation: fadeIn 0.25s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 85vw;
+  max-width: 400px;
+  background: #080f1e;
+  border-left: 1px solid var(--dav-border);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+  z-index: 1070;
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow-y: auto;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.mobile-accordion-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--dav-text-main);
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.mobile-accordion-btn:hover,
+.mobile-accordion-btn[aria-expanded="true"] {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: rgba(212, 175, 55, 0.3);
+  color: var(--dav-gold-300);
+}
+
+.mobile-sub-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.5rem;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.mobile-sub-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--dav-gold-300);
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Hero Video Section with Responsive Fixed-Header Offset
+   ========================================================================== */
+.hero-video-wrapper {
+  position: relative;
+  min-height: 100vh;
+  padding-top: calc(var(--header-height-desktop) + 12px);
+  padding-bottom: 1.75rem;
+  overflow: hidden;
+  background-color: #060b17;
+}
+
+@media (max-width: 991.98px) {
+  .hero-video-wrapper {
+    padding-top: calc(var(--header-height-mobile) + 10px);
+    padding-bottom: 1.25rem;
+    min-height: 100vh;
+  }
+}
+
+.hero-video-element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+}
+
+.hero-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 11, 23, 0.88) 0%,
+    rgba(6, 11, 23, 0.68) 45%,
+    rgba(6, 11, 23, 0.96) 100%
+  );
+  z-index: 2;
+}
+
+.hero-radial-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 25%, rgba(6, 11, 23, 0.85) 90%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 4;
+}
+
+.hero-stat-ribbon {
+  background: rgba(11, 21, 40, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.1);
+}
+
+/* ==========================================================================
+   Custom Components & Cards
+   ========================================================================== */
+.dav-card {
+  background: var(--grad-card);
+  border: 1px solid var(--dav-border-subtle);
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  height: 100%;
+}
+
+.dav-card:hover {
+  border-color: var(--dav-border);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px -12px rgba(212, 175, 55, 0.15);
+}
+
+.gold-gradient-text {
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.btn-gold {
+  background: var(--grad-gold);
+  color: #060b17 !important;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.3);
+  transition: all 0.25s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.45);
+}
+
+.btn-outline-gold {
+  border: 1px solid var(--dav-gold-500);
+  color: var(--dav-gold-300) !important;
+  background: rgba(212, 175, 55, 0.05);
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+}
+
+.btn-outline-gold:hover {
+  background: var(--dav-gold-500);
+  color: #060b17 !important;
+  border-color: var(--dav-gold-500);
+}
+
+.badge-gold {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: var(--dav-gold-300);
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+}
+
+/* Stepper Node Styling */
+.stepper-node {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--dav-navy-700);
+  border: 2px solid var(--dav-gold-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--dav-gold-400);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+  margin: 0 auto 1rem;
+}
+
+/* ==========================================================================
+   Mega Footer
+   ========================================================================== */
+.mega-footer {
+  background: #04070e;
+  border-top: 1px solid var(--dav-border);
+  color: var(--dav-text-muted);
+}
+
+.footer-link {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+  margin-bottom: 0.45rem;
+}
+
+.footer-link:hover {
+  color: var(--dav-gold-300);
+  transform: translateX(4px);
+}
+
+.footer-social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.25s ease;
+}
+
+.footer-social-btn:hover {
+  background: var(--dav-gold-500);
+  color: #060b17;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(212, 175, 55, 0.35);
+}
+
+/* Smooth Media Controls */
+.media-ctrl-btn {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.media-ctrl-btn:hover {
+  background: rgba(212, 175, 55, 0.8);
+  color: #060b17;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dav-navy-900);
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+  border: 2px solid var(--dav-navy-900);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dav-gold-500);
+}
