@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 
 // 1. Bootstrap CSS & Bootstrap Icons
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,16 +12,6 @@ import BootstrapClient from "@/components/BootstrapClient";
 import SchoolJsonLd from "@/components/SchoolJsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ClickSpark } from "@/components/reactbits";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dynamicpublicschool.edu"),
@@ -76,9 +65,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} data-bs-theme="dark">
+    <html lang="en" data-bs-theme="dark">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
         <SchoolJsonLd />
       </head>
       <body className="min-vh-100 d-flex flex-column position-relative">
